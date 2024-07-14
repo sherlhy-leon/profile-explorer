@@ -4,7 +4,7 @@
 
 form {
     width: 50%;
-    margin: 30px;
+    margin-top: 20px;
 }
 
 mat-form-field {
@@ -45,7 +45,8 @@ mat-form-field {
     transition: height 0.7s ease !important; /* Transition for height change */
 
     &.expanded {
-      height: 45%; /* Height when expanded */
+      height: 30%; /* Height when expanded */
+      margin-top: 20px;
     }
 }
 
