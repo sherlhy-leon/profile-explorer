@@ -6,5 +6,6 @@ export interface UserProfileDetails extends UserProfile {
     email: string;
     twitter_username: string;
     followers: number;
-    following: number
+    following: number;
+    bio:string;
 }

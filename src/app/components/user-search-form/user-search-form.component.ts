@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-search-form',
@@ -19,7 +19,7 @@ import { MatIcon } from '@angular/material/icon';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatIcon,
+    MatIconModule,
     MatIconButton,
   ]
 })
