@@ -1,0 +1,20 @@
+<form [formGroup]="searchForm" (keyup.enter)="onSubmit()" (onSubmit)="onSubmit()">
+    <mat-form-field>
+        <div class="search-box">
+            <input 
+            matInput
+            formControlName="query"
+            type="text"
+            autocomplete="off"
+            placeholder="Search user..."
+            aria-label="Search by user"
+            />
+            <button mat-button><mat-icon class="search-icon">search</mat-icon></button>
+        </div>
+    </mat-form-field>
+    <ng-container *ngIf="searchForm.get('query')?.invalid && !!searchForm.get('query')?.value">
+        <mat-error>
+            El texto de búsqueda debe tener entre 4 y 10 caracteres.
+        </mat-error>
+    </ng-container>
+</form>

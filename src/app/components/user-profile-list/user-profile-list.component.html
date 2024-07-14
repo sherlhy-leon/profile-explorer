@@ -1,0 +1,7 @@
+<mat-list>
+    <mat-list-item *ngFor="let user of users">
+      <a [routerLink]="['/user', user.login]">
+        {{ user.id }} - {{ user.login }}
+      </a>
+    </mat-list-item>
+</mat-list>
