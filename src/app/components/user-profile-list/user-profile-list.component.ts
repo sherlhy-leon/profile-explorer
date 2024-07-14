@@ -18,7 +18,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-profile-list.component.scss'
 })
 export class UserProfileListComponent {
-  @Input() users: UserProfile[] = []
-
-
+  @Input() users: UserProfile[] = [];
 }

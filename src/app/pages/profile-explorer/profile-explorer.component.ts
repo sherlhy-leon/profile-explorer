@@ -17,12 +17,14 @@ import { UserProfileService } from '../../services/user-profile.service';
 })
 export class ProfileExplorerComponent {
 
-  usersProfile: UserProfile[] = []
+  usersProfile: UserProfile[] = [];
   constructor(private readonly userProfileService: UserProfileService) {}
 
   search(searchValue: string): void {
     console.log("searching: ", searchValue)
-    this.userProfileService.searchUsersByLogin(searchValue).pipe(tap((usersProfile: UserProfile[]) => (this.usersProfile = usersProfile))).subscribe();
+    this.userProfileService.searchUsersByLogin(searchValue).subscribe((userProfiles) => {
+      this.usersProfile = userProfiles;
+    });
   }
 
 }
