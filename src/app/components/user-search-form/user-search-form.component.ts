@@ -37,5 +37,8 @@ export class UserSearchFormComponent {
     if(this.searchForm.valid){
       this.searchValue.emit(this.searchForm.get('query')?.value);
     }
+    else {
+      this.searchForm.markAllAsTouched();
+    }
   }
 }
