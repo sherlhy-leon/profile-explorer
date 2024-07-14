@@ -2,3 +2,33 @@ mat-list-item a {
     text-decoration: none;
     color: inherit;
 }
+
+mat-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.card-wrapper {
+    height: 100px !important;
+    width: 50%;
+    
+    .profile-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px !important;
+        margin: 0 10px;
+    }
+    
+    .card-center {
+        display: flex;
+        align-items: center;
+    }
+}
+
