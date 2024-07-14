@@ -26,6 +26,7 @@ import { MatIcon } from '@angular/material/icon';
 export class UserSearchFormComponent {
   searchForm: FormGroup;
   @Output() searchValue: EventEmitter<string> = new EventEmitter<string>()
+  isExpanded = false;
 
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
@@ -36,6 +37,7 @@ export class UserSearchFormComponent {
   onSubmit(): void {
     if(this.searchForm.valid){
       this.searchValue.emit(this.searchForm.get('query')?.value);
+      this.isExpanded = true;
     }
     else {
       this.searchForm.markAllAsTouched();

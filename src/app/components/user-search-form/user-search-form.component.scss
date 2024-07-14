@@ -4,7 +4,7 @@
 
 form {
     width: 50%;
-    margin: 40px;
+    margin: 30px;
 }
 
 mat-form-field {
@@ -12,7 +12,7 @@ mat-form-field {
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-    background-color: white !important; // Change background color
+    background-color: white !important;
 }
 
 ::ng-deep .mat-mdc-text-field-wrapper {
@@ -42,4 +42,10 @@ mat-form-field {
     align-items: center;
     height: 96%;
     flex-direction: column;
+    transition: height 0.7s ease !important; /* Transition for height change */
+
+    &.expanded {
+      height: 45%; /* Height when expanded */
+    }
 }
+
