@@ -7,5 +7,5 @@ export interface ProfileDetails extends Profile {
     twitter_username: string;
     followers: number;
     following: number;
-    bio:string;
+    bio: string;
 }
