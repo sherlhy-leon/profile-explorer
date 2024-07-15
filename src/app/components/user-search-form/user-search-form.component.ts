@@ -32,7 +32,7 @@ export class UserSearchFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      query: [this.searchTerm, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
+      query: [this.searchTerm, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
     });
     this.isExpanded = !!this.searchTerm;
   }
