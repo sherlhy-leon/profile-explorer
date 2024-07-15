@@ -1,0 +1,14 @@
+.image-card {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #444444;
+    height: 80vh;
+    font-size: 20px;
+}

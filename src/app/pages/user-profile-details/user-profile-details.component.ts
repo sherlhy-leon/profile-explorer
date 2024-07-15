@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UserProfileDetails } from '../../models/user-profile-details.model';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from "../../components/header/header.component";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-profile-details',
@@ -25,8 +26,13 @@ export class UserProfileDetailsComponent implements OnInit {
       next: (user) => {
         this.user = user;
       },
-      error: (error) => {
-        this.router.navigate(['/error']);
+      error: (error: HttpErrorResponse) => {
+        if(error.status === 404) {
+          this.router.navigate(['/not-found']);
+        }
+        else {
+          this.router.navigate(['/error']);
+        }
       }
     })
   };
