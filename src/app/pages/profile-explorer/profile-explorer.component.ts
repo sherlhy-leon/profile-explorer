@@ -31,6 +31,7 @@ export class ProfileExplorerComponent implements OnDestroy {
   searchValue: string;
   usersProfile: UserProfile[] = [];
   destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
+  
   constructor(private readonly userProfileService: UserProfileService, private router: Router) {}
 
   search(searchValue: string): void {
