@@ -29,6 +29,7 @@ export class ProfileExplorerComponent implements OnDestroy {
 
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   searchValue: string;
+  totalCount = 0;
   usersProfile: UserProfile[] = [];
   destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
   
@@ -52,8 +53,9 @@ export class ProfileExplorerComponent implements OnDestroy {
     this.loading$.next(true);
     this.userProfileService.searchUsersByLogin(searchValue, page)
       .pipe(takeUntil(this.destroy$))
-      .subscribe({ next: (userProfiles) => {
-        this.usersProfile = userProfiles;
+      .subscribe({ next: (response) => {
+        this.usersProfile = response.items;
+        this.totalCount = response.total_count;
         this.loading$.next(false);
       },
       error: (error) => {

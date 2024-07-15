@@ -7,7 +7,7 @@
 </ng-container>
 <ng-container *ngIf="!!usersProfile.length && !!searchValue">
     <div class="paginator-container">
-        <mat-paginator class="paginator" [length]="100" [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)"
+        <mat-paginator class="paginator" [length]="totalCount" [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)"
             aria-label="Select page">
         </mat-paginator>
     </div>
