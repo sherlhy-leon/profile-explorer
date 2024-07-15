@@ -1,0 +1,18 @@
+.paginator-container {
+    display: flex;
+    justify-content: center;
+    .paginator {
+        align-items: center;
+        width: 50%;
+    }
+}
+
+.no-data-container, .spinner-container {
+    display: flex;
+    justify-content: center;
+    .no-data, .spinner {
+        align-items: center;
+        height: 100px !important;
+        width: 50%;
+    }
+}

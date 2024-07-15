@@ -14,8 +14,8 @@ export class UserProfileService {
 
   constructor(private readonly http: HttpClient) {}
 
-  searchUsersByLogin(value: string): Observable<UserProfile[]> {
-    return this.http.get<UserResponse>(`${this.API_URL}/search/users?q=${value}&page=2&per_page=10`).pipe(map((resp: UserResponse) => resp.items));
+  searchUsersByLogin(value: string, page: number): Observable<UserProfile[]> {
+    return this.http.get<UserResponse>(`${this.API_URL}/search/users?q=${value}&page=${page}&per_page=10`).pipe(map((resp: UserResponse) => resp.items));
   }
 
   getUserDetails(value: string): Observable<UserProfileDetails> {

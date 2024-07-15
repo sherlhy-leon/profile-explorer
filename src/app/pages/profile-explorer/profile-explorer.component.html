@@ -1,2 +1,37 @@
 <app-user-search-form (searchValue)="search($event)"></app-user-search-form>
-<app-user-profile-list [users]="usersProfile"></app-user-profile-list>
+
+<ng-container *ngIf="!(loading$ | async); else spinner">
+    <ng-container *ngIf="!searchValue || !!usersProfile.length; else noData">
+        <app-user-profile-list [users]="usersProfile"></app-user-profile-list>
+    </ng-container>
+    <ng-container *ngIf="!!usersProfile.length && !!searchValue">
+        <div class="paginator-container">
+            <mat-paginator 
+            class="paginator"
+            [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            [hidePageSize]="true"
+            (page)="nextPage($event)"
+            aria-label="Select page">
+        </mat-paginator>
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-template #noData>
+    <div class="no-data-container">
+        <div class="no-data">
+            <mat-icon>info</mat-icon>
+            <span>No user profiles available to display.</span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #spinner>
+    <div class="spinner-container">
+        <mat-spinner class="spinner" aria-label="loading..."></mat-spinner>
+
+    </div>
+</ng-template>
+
