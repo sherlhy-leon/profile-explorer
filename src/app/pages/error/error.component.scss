@@ -1,0 +1,9 @@
+.no-data-container, .spinner-container {
+    display: flex;
+    justify-content: center;
+    .no-data, .spinner {
+        align-items: center;
+        height: 100px !important;
+        width: 50%;
+    }
+}
