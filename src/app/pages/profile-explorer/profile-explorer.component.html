@@ -1,28 +1,30 @@
-<app-user-search-form [searchTerm]="(searchValue$ | async)" (searchValue)="search($event)"></app-user-search-form>
+<ng-container *ngIf="(state$ | async) as state">
+    <app-user-search-form [searchTerm]="state.searchTerm" (searchValue)="search($event)"></app-user-search-form>
 
-<ng-container *ngIf="!(loading$ | async); else spinner">
-    <ng-container *ngIf="!(searchValue$ | async) || !!(totalCount$ | async); else noData">
-        <app-user-profile-list [users]="usersProfile$ | async"></app-user-profile-list>
+    <ng-container *ngIf="!state.loading; else spinner">
+        <ng-container *ngIf="!state.searchTerm || !!state.totalCount; else noData">
+            <app-user-profile-list [users]="state.usersProfile"></app-user-profile-list>
+        </ng-container>
     </ng-container>
-</ng-container>
-<ng-container *ngIf="!!(totalCount$ | async) && !!(searchValue$ | async)">
-    <div class="paginator-container">
-        <mat-paginator class="paginator" [length]="totalCount$ | async" [pageIndex]="(pageIndex$ | async) - 1"
-            [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)" aria-label="Select page">
-        </mat-paginator>
-    </div>
-</ng-container>
-<ng-template #noData>
-    <div class="no-data-container">
-        <div class="no-data">
-            <mat-icon>info</mat-icon>
-            <span>No user profiles matched the search criteria.</span>
+    <ng-container *ngIf="!!state.totalCount && !!state.searchTerm">
+        <div class="paginator-container">
+            <mat-paginator class="paginator" [length]="state.totalCount" [pageIndex]="state.pageIndex - 1"
+                [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)" aria-label="Select page">
+            </mat-paginator>
         </div>
-    </div>
-</ng-template>
+    </ng-container>
+    <ng-template #noData>
+        <div class="no-data-container">
+            <div class="no-data">
+                <mat-icon>info</mat-icon>
+                <span>No user profiles matched the search criteria.</span>
+            </div>
+        </div>
+    </ng-template>
 
-<ng-template #spinner>
-    <div class="spinner-container">
-        <mat-spinner class="spinner" aria-label="loading..."></mat-spinner>
-    </div>
-</ng-template>
+    <ng-template #spinner>
+        <div class="spinner-container">
+            <mat-spinner class="spinner" aria-label="loading..."></mat-spinner>
+        </div>
+    </ng-template>
+</ng-container>
