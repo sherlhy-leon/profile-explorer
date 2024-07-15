@@ -5,11 +5,12 @@ import { UserProfileService } from '../../services/user-profile.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UserProfileDetails } from '../../models/user-profile-details.model';
 import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
   selector: 'app-user-profile-details',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, RouterModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, RouterModule, HeaderComponent],
   templateUrl: './user-profile-details.component.html',
   styleUrl: './user-profile-details.component.scss'
 })
@@ -25,12 +26,10 @@ export class UserProfileDetailsComponent implements OnInit {
         this.user = user;
       },
       error: (error) => {
-        console.error('Error fetching user details', error);
+        this.router.navigate(['/error']);
       }
     })
   };
 
-  navigateHome() {
-    this.router.navigate(['/']);
-  }
+ 
 }
