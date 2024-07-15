@@ -4,21 +4,14 @@
     <ng-container *ngIf="!searchValue || !!usersProfile.length; else noData">
         <app-user-profile-list [users]="usersProfile"></app-user-profile-list>
     </ng-container>
-    <ng-container *ngIf="!!usersProfile.length && !!searchValue">
-        <div class="paginator-container">
-            <mat-paginator 
-            class="paginator"
-            [length]="100"
-            [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            [hidePageSize]="true"
-            (page)="nextPage($event)"
+</ng-container>
+<ng-container *ngIf="!!usersProfile.length && !!searchValue">
+    <div class="paginator-container">
+        <mat-paginator class="paginator" [length]="100" [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)"
             aria-label="Select page">
         </mat-paginator>
-        </div>
-    </ng-container>
+    </div>
 </ng-container>
-
 <ng-template #noData>
     <div class="no-data-container">
         <div class="no-data">
@@ -33,4 +26,3 @@
         <mat-spinner class="spinner" aria-label="loading..."></mat-spinner>
     </div>
 </ng-template>
-
