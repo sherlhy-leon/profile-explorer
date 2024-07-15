@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserProfileService } from '../../services/user-profile.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,19 +22,23 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconButton,
   ]
 })
-export class UserSearchFormComponent {
+export class UserSearchFormComponent implements OnInit {
   searchForm: FormGroup;
+  @Input() searchTerm: string;
   @Output() searchValue: EventEmitter<string> = new EventEmitter<string>()
   isExpanded = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void {
     this.searchForm = this.fb.group({
-      query: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
+      query: [this.searchTerm, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
     });
+    this.isExpanded = !!this.searchTerm;
   }
 
   onSubmit(): void {
-    if(this.searchForm.valid){
+    if (this.searchForm.valid) {
       this.searchValue.emit(this.searchForm.get('query')?.value);
       this.isExpanded = true;
     }

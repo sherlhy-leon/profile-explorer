@@ -1,19 +1,43 @@
 import { Injectable } from '@angular/core';
 import { UserProfileService } from '../../../services/user-profile.service';
-import { UserProfile } from '../../../models/user-profile.model';
-import { Observable, BehaviorSubject, tap } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs';
+import { UserResponse } from '../../../models/users-response.model';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProfileExplorerFacade  {
-    
-    usersProfile: BehaviorSubject<UserProfile[]> = new BehaviorSubject<UserProfile[]>([])
-    constructor(private readonly userProfileService: UserProfileService) {}
+export class ProfileExplorerFacade {
 
-    searchUsersByLogin(searchValue: string): Observable<UserProfile[]> {
-        return this.userProfileService.searchUsersByLogin(searchValue).pipe(tap((usersProfile: UserProfile[]) => (this.usersProfile.next(usersProfile))));
+    private _userResponse$ = new BehaviorSubject<UserResponse>(null);
+    userResponse$ = this._userResponse$.asObservable();
+    private _searchTerm$ = new BehaviorSubject<string>("");
+    searchTerm$ = this._searchTerm$.asObservable();
+    private _pageIndex$ = new BehaviorSubject<number>(1);
+    pageIndex$ = this._pageIndex$.asObservable();
+    private _loading$ = new BehaviorSubject<boolean>(false);
+    loading$ = this._loading$.asObservable();
+
+    constructor(private readonly userProfileService: UserProfileService, private router: Router) { }
+
+    searchUsersByLogin(searchValue: string, page = 1) {
+        this._loading$.next(true);
+        this.userProfileService.searchUsersByLogin(searchValue, page).subscribe({
+            next: response => {
+                this._loading$.next(false);
+                this._searchTerm$.next(searchValue);
+                this._pageIndex$.next(page);
+                this._userResponse$.next(response);
+            },
+            error: _ => {
+                this._loading$.next(false);
+                this.router.navigate(['/error']);
+            }
+        });
     }
-   
+
+    getSearchTerm() {
+        return this._searchTerm$.getValue();
+    }
+
 }

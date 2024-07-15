@@ -1,14 +1,14 @@
-<app-user-search-form (searchValue)="search($event)"></app-user-search-form>
+<app-user-search-form [searchTerm]="(searchValue$ | async)" (searchValue)="search($event)"></app-user-search-form>
 
 <ng-container *ngIf="!(loading$ | async); else spinner">
-    <ng-container *ngIf="!searchValue || !!usersProfile.length; else noData">
-        <app-user-profile-list [users]="usersProfile"></app-user-profile-list>
+    <ng-container *ngIf="!(searchValue$ | async) || !!(totalCount$ | async); else noData">
+        <app-user-profile-list [users]="usersProfile$ | async"></app-user-profile-list>
     </ng-container>
 </ng-container>
-<ng-container *ngIf="!!usersProfile.length && !!searchValue">
+<ng-container *ngIf="!!(totalCount$ | async) && !!(searchValue$ | async)">
     <div class="paginator-container">
-        <mat-paginator class="paginator" [length]="totalCount" [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)"
-            aria-label="Select page">
+        <mat-paginator class="paginator" [length]="totalCount$ | async" [pageIndex]="(pageIndex$ | async) - 1"
+            [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)" aria-label="Select page">
         </mat-paginator>
     </div>
 </ng-container>
