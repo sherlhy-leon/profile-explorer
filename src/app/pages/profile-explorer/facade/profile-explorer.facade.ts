@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserProfileService } from '../../../services/user-profile.service';
+import { ProfileService } from '../../../services/profile.service';
 import { BehaviorSubject } from 'rxjs';
 import { UserResponse } from '../../../models/users-response.model';
 import { Router } from '@angular/router';
@@ -11,21 +11,21 @@ export class ProfileExplorerFacade {
 
     private _userResponse$ = new BehaviorSubject<UserResponse>(null);
     userResponse$ = this._userResponse$.asObservable();
-    private _searchTerm$ = new BehaviorSubject<string>("");
-    searchTerm$ = this._searchTerm$.asObservable();
+    private _searchValue$ = new BehaviorSubject<string>("");
+    searchValue$ = this._searchValue$.asObservable();
     private _pageIndex$ = new BehaviorSubject<number>(1);
     pageIndex$ = this._pageIndex$.asObservable();
     private _loading$ = new BehaviorSubject<boolean>(false);
     loading$ = this._loading$.asObservable();
 
-    constructor(private readonly userProfileService: UserProfileService, private router: Router) { }
+    constructor(private readonly profileService: ProfileService, private router: Router) { }
 
-    searchUsersByLogin(searchValue: string, page = 1) {
+    searchProfilesByLogin(searchValue: string, page = 1) {
         this._loading$.next(true);
-        this.userProfileService.searchUsersByLogin(searchValue, page).subscribe({
+        this.profileService.searchProfilesByLogin(searchValue, page).subscribe({
             next: response => {
                 this._loading$.next(false);
-                this._searchTerm$.next(searchValue);
+                this._searchValue$.next(searchValue);
                 this._pageIndex$.next(page);
                 this._userResponse$.next(response);
             },
@@ -36,8 +36,7 @@ export class ProfileExplorerFacade {
         });
     }
 
-    getSearchTerm() {
-        return this._searchTerm$.getValue();
+    getSearchValue() {
+        return this._searchValue$.getValue();
     }
-
 }

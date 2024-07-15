@@ -1,7 +1,7 @@
-import { UserProfile } from "./user-profile.model";
+import { Profile } from "./profile.model";
 
 export interface UserResponse {
     total_count: number;
     incomplete_results: boolean;
-    items: UserProfile[]
+    items: Profile[]
 }

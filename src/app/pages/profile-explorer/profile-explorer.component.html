@@ -1,12 +1,12 @@
 <ng-container *ngIf="(state$ | async) as state">
-    <app-user-search-form [searchTerm]="state.searchTerm" (searchValue)="search($event)"></app-user-search-form>
+    <app-search-form [searchValue]="state.searchValue" (searchValueEmitter)="search($event)"></app-search-form>
 
     <ng-container *ngIf="!state.loading; else spinner">
-        <ng-container *ngIf="!state.searchTerm || !!state.totalCount; else noData">
-            <app-user-profile-list [users]="state.usersProfile"></app-user-profile-list>
+        <ng-container *ngIf="!state.searchValue || !!state.totalCount; else noData">
+            <app-profile-list [profiles]="state.profiles"></app-profile-list>
         </ng-container>
     </ng-container>
-    <ng-container *ngIf="!!state.totalCount && !!state.searchTerm">
+    <ng-container *ngIf="!!state.totalCount && !!state.searchValue">
         <div class="paginator-container">
             <mat-paginator class="paginator" [length]="state.totalCount" [pageIndex]="state.pageIndex - 1"
                 [pageSize]="10" [hidePageSize]="true" (page)="nextPage($event)" aria-label="Select page">

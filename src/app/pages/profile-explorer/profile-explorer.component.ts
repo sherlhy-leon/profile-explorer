@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserSearchFormComponent } from '../../components/user-search-form/user-search-form.component';
-import { UserProfileListComponent } from '../../components/user-profile-list/user-profile-list.component';
+import { SearchFormComponent } from '../../components/search-form/search-form.component';
+import { ProfileListComponent } from '../../components/profile-list/profile-list.component';
 import { Observable, map, combineLatest } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -14,8 +14,8 @@ import { AppState } from '../../state/app-state';
   standalone: true,
   imports: [
     CommonModule, 
-    UserSearchFormComponent, 
-    UserProfileListComponent,
+    SearchFormComponent, 
+    ProfileListComponent,
     MatPaginatorModule,
     MatIconModule,
     MatProgressSpinnerModule
@@ -31,28 +31,28 @@ export class ProfileExplorerComponent implements OnInit {
 
   ngOnInit(): void {
     this.state$ = combineLatest([
-      this.profileExplorerFacade.searchTerm$,
+      this.profileExplorerFacade.searchValue$,
       this.profileExplorerFacade.userResponse$.pipe(map(response => response?.items ?? [])),
       this.profileExplorerFacade.userResponse$.pipe(map(response => response?.total_count ?? 0)),
       this.profileExplorerFacade.loading$,
       this.profileExplorerFacade.pageIndex$,
     ]).pipe(
-      map(([searchTerm, usersProfile, totalCount, loading, pageIndex]) => ({
-        searchTerm,
+      map(([searchValue, profiles, totalCount, loading, pageIndex]) => ({
+        searchValue,
         loading,
         totalCount,
-        usersProfile,
+        profiles,
         pageIndex
       }))
     );
   }
 
   search(searchValue: string): void {
-    this.profileExplorerFacade.searchUsersByLogin(searchValue);
+    this.profileExplorerFacade.searchProfilesByLogin(searchValue);
   }
 
   nextPage(page: PageEvent) {
-    const searchValue = this.profileExplorerFacade.getSearchTerm();
-    this.profileExplorerFacade.searchUsersByLogin(searchValue, page.pageIndex + 1);
+    const searchValue = this.profileExplorerFacade.getSearchValue();
+    this.profileExplorerFacade.searchProfilesByLogin(searchValue, page.pageIndex + 1);
   }
 }

@@ -8,9 +8,9 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-user-search-form',
-  templateUrl: './user-search-form.component.html',
-  styleUrl: './user-search-form.component.scss',
+  selector: 'app-search-form',
+  templateUrl: './search-form.component.html',
+  styleUrl: './search-form.component.scss',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,24 +22,24 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconButton,
   ]
 })
-export class UserSearchFormComponent implements OnInit {
+export class SearchFormComponent implements OnInit {
   searchForm: FormGroup;
-  @Input() searchTerm: string;
-  @Output() searchValue: EventEmitter<string> = new EventEmitter<string>()
+  @Input() searchValue: string;
+  @Output() searchValueEmitter: EventEmitter<string> = new EventEmitter<string>()
   isExpanded = false;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      query: [this.searchTerm, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
+      query: [this.searchValue, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
     });
-    this.isExpanded = !!this.searchTerm;
+    this.isExpanded = !!this.searchValue;
   }
 
   onSubmit(): void {
     if (this.searchForm.valid) {
-      this.searchValue.emit(this.searchForm.get('query')?.value);
+      this.searchValueEmitter.emit(this.searchForm.get('query')?.value);
       this.isExpanded = true;
     }
     else {

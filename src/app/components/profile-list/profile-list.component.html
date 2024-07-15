@@ -1,0 +1,14 @@
+<div class="container">
+  <mat-list>
+    <mat-list-item *ngFor="let profile of profiles" class="card-wrapper">
+      <a [routerLink]="['/user', profile.login]">
+        <mat-card appearance="outlined">
+          <mat-card-content class="card-center">
+            <img mat-card-image [src]="profile.avatar_url" alt="{{ profile.login }}" class="profile-img">
+            {{ profile.id }} - {{ profile.login }}
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </mat-list-item>
+  </mat-list>
+</div>

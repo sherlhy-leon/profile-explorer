@@ -8,6 +8,4 @@ import { HeaderComponent } from "../../components/header/header.component";
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss'
 })
-export class NotFoundComponent {
-
-}
+export class NotFoundComponent {}

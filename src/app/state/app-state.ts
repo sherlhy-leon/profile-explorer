@@ -1,9 +1,9 @@
-import { UserProfile } from "../models/user-profile.model";
+import { Profile } from "../models/profile.model";
 
 export interface AppState {
-    searchTerm: string;
+    searchValue: string;
     loading: boolean;
-    usersProfile: UserProfile[];
+    profiles: Profile[];
     totalCount: number;
     pageIndex: number;
 }

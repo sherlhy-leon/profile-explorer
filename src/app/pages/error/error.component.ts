@@ -9,6 +9,4 @@ import { HeaderComponent } from '../../components/header/header.component';
   templateUrl: './error.component.html',
   styleUrl: './error.component.scss'
 })
-export class ErrorComponent {
-
-}
+export class ErrorComponent {}

@@ -1,6 +1,6 @@
-import { UserProfile } from "./user-profile.model";
+import { Profile } from "./profile.model";
 
-export interface UserProfileDetails extends UserProfile {
+export interface ProfileDetails extends Profile {
     type: string;
     name: string;
     email: string;

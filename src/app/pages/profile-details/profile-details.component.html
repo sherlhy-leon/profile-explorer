@@ -1,16 +1,16 @@
 <app-header></app-header>
 
 <div class="container">
-  <mat-card *ngIf="user">
+  <mat-card *ngIf="profile">
     <div class="info-card">
-      <img mat-card-image [src]="user.avatar_url" alt="{{ user.login }}" class="profile-img">
+      <img mat-card-image [src]="profile.avatar_url" alt="{{ profile.login }}" class="profile-img">
       <div class="info-body">
-        <mat-card-title>{{ user.name || '-'}} </mat-card-title>
+        <mat-card-title>{{ profile.name || '-'}} </mat-card-title>
         <mat-card-subtitle class="subtitle">
-          <a [href]="'https://github.com/' + user.login">{{ "@" + user.login }}</a>
-          <span class="card-label"> <mat-icon>badge</mat-icon> {{ user.id }}</span>
-          <span class="card-label" *ngIf="user.email"><mat-icon>email</mat-icon> {{ user.email }}</span>
-          <span class="card-label" *ngIf="user.twitter_username">
+          <a [href]="'https://github.com/' + profile.login">{{ "@" + profile.login }}</a>
+          <span class="card-label"> <mat-icon>badge</mat-icon> {{ profile.id }}</span>
+          <span class="card-label" *ngIf="profile.email"><mat-icon>email</mat-icon> {{ profile.email }}</span>
+          <span class="card-label" *ngIf="profile.twitter_username">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" role="img"
               aria-labelledby="an2ld10bze2lcqykysq37hqu5m6cqng" class="octicon">
               <title id="an2ld10bze2lcqykysq37hqu5m6cqng">X</title>
@@ -24,16 +24,16 @@
                   <rect width="16" height="16" fill="white"></rect>
                 </clipPath>
               </defs>
-            </svg> <a [href]="'https://x.com/' + user.twitter_username"> {{ user.twitter_username }}</a></span>
-          <span class="card-label"><mat-icon>group</mat-icon> {{ user.followers }} followers - {{ user.following }}
+            </svg> <a [href]="'https://x.com/' + profile.twitter_username"> {{ profile.twitter_username }}</a></span>
+          <span class="card-label"><mat-icon>group</mat-icon> {{ profile.followers }} followers - {{ profile.following }}
             following </span>
         </mat-card-subtitle>
       </div>
     </div>
     <mat-card-content>
       <div class="card-content-section">
-        {{user.bio}}
-        <span *ngIf="!user.bio"><i>No description...</i></span>
+        {{profile.bio}}
+        <span *ngIf="!profile.bio"><i>No description...</i></span>
       </div>
     </mat-card-content>
   </mat-card>
